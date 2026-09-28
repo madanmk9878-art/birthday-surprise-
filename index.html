@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Nanu! 🎂</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* Initial Gift Box Screen */
+        .gift-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .gift-box {
+            font-size: 80px;
+            cursor: pointer;
+            animation: bounce 1.5s infinite;
+            transition: transform 0.3s;
+        }
+
+        .gift-box:hover {
+            transform: scale(1.15);
+        }
+
+        .click-text {
+            font-size: 1.2rem;
+            color: #d63384;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Surprise Card Screen */
+        .card-screen {
+            display: none;
+            background: #ffffff;
+            padding: 30px 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            animation: popUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .cake-emoji {
+            font-size: 60px;
+            margin-bottom: 10px;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+
+        h1 {
+            color: #ff4757;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .message-box {
+            background: #fff0f3;
+            border-left: 5px solid #ff4757;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 1.05rem;
+            color: #2f3542;
+            line-height: 1.7;
+            white-space: pre-line;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+        }
+
+        .decorations {
+            font-size: 1.5rem;
+            margin-top: 15px;
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes popUp {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Confetti canvas */
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 99;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas"></canvas>
+
+    <div class="container">
+        <!-- Step 1: Click Surprise -->
+        <div class="gift-screen" id="giftScreen">
+            <div class="gift-box" onclick="openSurprise()">🎁</div>
+            <div class="click-text" onclick="openSurprise()">तपाईँको लागि एउटा सरप्राइज छ! यहाँ थिच्नुहोस् 👈</div>
+        </div>
+
+        <!-- Step 2: Birthday Card & Message -->
+        <div class="card-screen" id="cardScreen">
+            <div class="cake-emoji">🎂✨</div>
+            <h1>Happy Birthday! 🎉</h1>
+            
+            <div class="message-box">
+rabina
+🎉 HAPPY birthday to you mero nanu janma din ko derai vanda derai suvakamana sadhai khusi hunu galat baato ma kahile na lagnu bau ama le vaneko mannu asal xori ra asal baini bannu. Best of luck for your this birthday because now suru hunxa asli life so always be happy and always be good vibes.
+Always stay healthy.
+Feri pani janma din ko derai derai suvakamana taadai baat vayepani 🎂🎉🎊💐🍰
+            </div>
+
+            <div class="decorations">
+                🎈🥳🎁💖✨
+            </div>
+        </div>
+    </div>
+
+    <!-- Canvas Confetti Script -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        function openSurprise() {
+            document.getElementById('giftScreen').style.display = 'none';
+            document.getElementById('cardScreen').style.display = 'block';
+
+            // Trigger Confetti
+            var duration = 3 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+    </script>
+</body>
+</html>
